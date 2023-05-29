@@ -21,7 +21,7 @@
     />
     <link rel="stylesheet" href="{% static 'Styles/estilos.css' %}" />
   </head>
-  <body class="cuerpo d-flex flex-column min-vh-100">
+  <body>
     <header>
       <div class="shadow p-3 mb-3 barraSuperior">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -160,7 +160,7 @@
                       >
                         Cerrar
                       </button>
-                      <button type="submit" class="btn btn-primary">
+                      <button type="submit" class="btn btn-primary" id="login-button">
                         Iniciar Sesion
                       </button>
                     </div>
@@ -172,37 +172,37 @@
         </nav>
       </div>
     </header>
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 main">
         {% block content %}
         {% endblock %}
     </main>
-      <div class="barraSuperior barraInferior">
-        <footer>
-          <div class="mb-auto">
-            <p class="text-center">
-              PetWalkers - Todos los derechos reservados &copy; 2023
-            </p>
-          </div>
-        </footer>
-        <div class="d-flex align-items-center justify-content-center">
-          <span class="">
-            <i class="bi bi-facebook fs-3">
-              <a href="#"></a>
-            </i>
-            <i class="bi bi-twitter fs-3">
-              <a href="#"></a>
-            </i>
-            <i class="bi bi-instagram fs-3">
-              <a href="#"></a>
-            </i>
-          </span>
+  </body>
+    <div class="barraInferior">
+      <footer>
+        <div class="">
+          <p class="text-center">
+            PetWalkers - Todos los derechos reservados &copy; 2023
+          </p>
         </div>
+      </footer>
+      <div class="d-flex align-items-center justify-content-center">
+        <span class="">
+          <i class="bi bi-facebook fs-3">
+            <a href="#"></a>
+          </i>
+          <i class="bi bi-twitter fs-3">
+            <a href="#"></a>
+          </i>
+          <i class="bi bi-instagram fs-3">
+            <a href="#"></a>
+          </i>
+        </span>
       </div>
-    
+    </div>
     <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="{% static 'Scripts/scripts.js' %}"></script>
     
-  </body>
+  
 </html>
