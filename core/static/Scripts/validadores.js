@@ -42,6 +42,7 @@ const validarFormulario = (e) => {
 		case "telefono":
 			validarCampo(expresiones.telefono, e.target, 'telefono');
 		break;
+		
 	}
 }
 
@@ -71,20 +72,38 @@ inputs.forEach((input) => {
 
 formulario.addEventListener('submit', (e) => {
 	e.preventDefault();
-	
+  
 	const terminos = document.getElementById('terminos');
-	if(campos.nombre && campos.edad && campos.correo && campos.telefono ){
-		formulario.reset();
-
-		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-		setTimeout(() => {
-			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		}, 5000);
-
-		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-			icono.classList.remove('formulario__grupo-correcto');
+	if (campos.nombre && campos.edad && campos.correo && campos.telefono) {
+	  const cuidadorId = document.getElementById('cuidadorId').value; // Get the cuidadorId value
+	  const formData = new FormData(formulario);
+	  const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+	  formData.append('csrfmiddlewaretoken', csrfToken);
+	  formData.append('cuidadorId', cuidadorId); // Include cuidadorId in the form data
+  
+	  fetch(`/editar_cuidador/${cuidadorId}/`, {
+		method: 'POST',
+		body: formData,
+	  })
+		.then((response) => {
+		  if (response.ok) {
+			formulario.reset();
+			document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+			setTimeout(() => {
+			  document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+			}, 5000);
+			document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+			  icono.classList.remove('formulario__grupo-correcto');
+			});
+		  } else {
+			console.error('Form submission error');
+		  }
+		})
+		.catch((error) => {
+		  console.error('Form submission error:', error);
 		});
 	} else {
-		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
-	}}
-);
+	  document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+	}
+  });
+  

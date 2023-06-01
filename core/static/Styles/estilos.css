@@ -265,3 +265,7 @@ body {
   footer {
     margin-bottom:0px;
 }
+
+.page-buttons{
+  margin-right: 8px;
+}

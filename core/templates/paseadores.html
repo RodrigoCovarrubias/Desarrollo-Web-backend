@@ -1,135 +1,97 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <main>
   <div class="cuerpo">
     <h1 class="titulo text-center">NUESTROS CUIDADORES</h1>
     <div class="container">
       <div class="row mt-4 mb-5">
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-          <div class="card" style="width: 18rem">
-            <img
-              class="card-img-top"
-              src="{% static 'img/cuidador-3.jpg' %}"
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Ana Martínez</h5>
-              <p class="card-text">
-                Como cuidador y paseador de mascotas, me encargo de brindar
-                un cuidado afectuoso y responsable para tus mascotas,
-                asegurándome de que estén felices y saludables en todo
-                momento.
-              </p>
-              <a href="#" class="btn btn-primary">Quiero este cuidador</a>
+        {% csrf_token %}
+        <div class="row mt-4 mb-5">
+          {% for cuidador in cuidadores %}
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card h-100">
+              {% if cuidador.image %}
+              <img class="card-img-top" src="{{ cuidador.image.url }}" alt="Card image cap" style="object-fit: cover;">
+              {% else %}
+              <div class="card-img-top no-image"></div>
+              {% endif %}
+              <div class="card-body"
+                   data-nombre="{{ cuidador.name }}"
+                   data-descripcion="{{ cuidador.description }}"
+                   data-id="{{ cuidador.id }}">
+                <h5 class="card-title">{{ cuidador.name }}</h5>
+                <p class="card-text">{{ cuidador.description }}</p>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="selected_cuidadores" value="{{ cuidador.id }}">
+                    Seleccionar
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-          <div class="card" style="width: 18rem">
-            <img
-              class="card-img-top"
-              src="{% static 'img/cuidador4.jpg' %}"
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Laura Pérez</h5>
-              <p class="card-text">
-                Soy un cuidador y paseador de mascotas con experiencia en el
-                cuidado de diferentes tipos de animales. Me comprometo a
-                proporcionar un servicio excepcional y a garantizar su
-                bienestar y seguridad.
-              </p>
-              <a href="#" class="btn btn-primary">Quiero este cuidador</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-          <div class="card" style="width: 18rem">
-            <img
-              class="card-img-top"
-              src="{%static 'img/cuidador7.jpg' %}"
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Carlos González</h5>
-              <p class="card-text">
-                Como cuidador y paseador de mascotas, me encanta trabajar
-                con animales y estoy dedicado a brindarles el mejor cuidado
-                posible. Soy responsable y comprometido con garantizar su
-                felicidad y salud.
-              </p>
-              <a href="#" class="btn btn-primary">Quiero este cuidador</a>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-          <div class="card" style="width: 18rem">
-            <img
-              class="card-img-top"
-              src="{% static 'img/cuidador8.jpg' %}"
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title">David Fernández</h5>
-              <p class="card-text">
-                Soy un apasionado cuidador y paseador de mascotas,
-                comprometido con brindar un cuidado de alta calidad para tus
-                queridas mascotas. Me aseguro de que reciban el ejercicio
-                adecuado y estén cómodos y seguros en todo momento..
-              </p>
-              <a href="#" class="btn btn-primary">Quiero este cuidador</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-          <div class="card" style="width: 18rem">
-            <img
-              class="card-img-top"
-              src="{% static 'img/cuidador5.jpg'%}"
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Sofía Torres</h5>
-              <p class="card-text">
-                Como cuidador y paseador de mascotas, mi objetivo es ofrecer
-                un servicio personalizado y profesional para tus mascotas.
-                Soy amable y responsable, y me comprometo a garantizar su
-                felicidad y bienestar en todo momento.
-              </p>
-              <a href="#" class="btn btn-primary">Quiero este cuidador</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-          <div class="card" style="width: 18rem">
-            <img
-              class="card-img-top"
-              src="{% static 'img/cuidador9.jpg' %}"
-              alt="Card image cap"
-            />
-
-            <div class="card-body">
-              <h5 class="card-title">María García</h5>
-              <p class="card-text">
-                Soy un cuidador y paseador de mascotas confiable y
-                comprometido, con experiencia en el cuidado de diferentes
-                tipos de mascotas. Me aseguro de proporcionarles el cuidado
-                amoroso y responsable que necesitan para estar felices y
-                saludables.
-              </p>
-              <a href="#" class="btn btn-primary">Quiero este cuidador</a>
-            </div>
-          </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col text-center">
+        <div class="d-inline-block">
+          <a href="{% url 'registro' %}" class="btn btn-primary">Paseos</a>
+          <button id="actualizarButton" class="btn btn-success">Actualizar</button>
+          <button id="eliminarButton" class="btn btn-danger" data-csrf-token="{{ csrf_token }}">Eliminar</button>
         </div>
       </div>
     </div>
   </div>
-{%endblock%}
+  <div class="modal fade" id="editarCuidadorModal" tabindex="-1" role="dialog" aria-labelledby="editarCuidadorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarCuidadorModalLabel">Editar Cuidador</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editarCuidadorForm">
+            <input type="hidden" id="cuidadorId" name="cuidadorId" value="">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <div class="form-group">
+              <label for="apellido">Apellidos</label>
+              <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+              <label for="edad">Edad</label>
+              <input type="number" class="form-control" id="edad" name="edad" required>
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo Electrónico</label>
+              <input type="email" class="form-control" id="correo" name="correo" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="text" class="form-control" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+              <label for="descripcion">Descripción</label>
+              <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
