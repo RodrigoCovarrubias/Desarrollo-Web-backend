@@ -75,11 +75,11 @@ formulario.addEventListener('submit', (e) => {
   
 	const terminos = document.getElementById('terminos');
 	if (campos.nombre && campos.edad && campos.correo && campos.telefono) {
-	  const cuidadorId = document.getElementById('cuidadorId').value; // Get the cuidadorId value
+	  const cuidadorId = document.getElementById('cuidadorId').value; 
 	  const formData = new FormData(formulario);
 	  const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 	  formData.append('csrfmiddlewaretoken', csrfToken);
-	  formData.append('cuidadorId', cuidadorId); // Include cuidadorId in the form data
+	  formData.append('cuidadorId', cuidadorId); 
   
 	  fetch(`/editar_cuidador/${cuidadorId}/`, {
 		method: 'POST',

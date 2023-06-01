@@ -32,7 +32,7 @@ function obtenerMascotas() {
         })
           .done(data => {
             mostrarMascotas(data);
-            $('#mascotas-container').show(); // Show the container after data is fetched
+            $('#mascotas-container').show(); 
           })
           .fail(error => {
             console.error('Error:', error);
