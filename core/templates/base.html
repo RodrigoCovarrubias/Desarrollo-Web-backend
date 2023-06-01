@@ -21,7 +21,7 @@
     />
     <link rel="stylesheet" href="{% static 'Styles/estilos.css' %}" />
   </head>
-  <body class="cuerpo d-flex flex-column min-vh-100">
+  <body>
     <header>
       <div class="shadow p-3 mb-3 barraSuperior">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -160,7 +160,7 @@
                       >
                         Cerrar
                       </button>
-                      <button type="submit" class="btn btn-primary">
+                      <button type="submit" class="btn btn-primary" id="login-button">
                         Iniciar Sesion
                       </button>
                     </div>
@@ -172,7 +172,7 @@
         </nav>
       </div>
     </header>
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 main">
         {% block content %}
         {% endblock %}
     </main>
@@ -185,7 +185,7 @@
           </div>
         </footer>
         <div class="d-flex align-items-center justify-content-center">
-          <span class="pb-3">
+          <span class="">
             <i class="bi bi-facebook fs-3">
               <a href="#"></a>
             </i>
@@ -204,5 +204,5 @@
     <script src="{% static 'Scripts/scripts.js' %}"></script>
     <script src="{% static 'Scripts/mascotas.js' %}"></script>
     
-  </body>
+  
 </html>
