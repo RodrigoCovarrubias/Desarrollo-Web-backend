@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from core import views
+from core.login_view import login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +14,10 @@ urlpatterns = [
     path('paseadores/', views.CuidadoresListView.as_view(), name='paseadores'),
     path('eliminar_cuidadores/', views.EliminarCuidadoresView.as_view(), name='eliminar_cuidadores'),
     path('editar_cuidador/<int:cuidador_id>/', views.editar_cuidador, name='editar_cuidador'),
+    path('api/login',login,name='login'),
+    path('api/cuidadores',views.obtieneUsuarios,name='cuidadores'),
+    path('api/crearcuidadores',views.creaUsuarios,name='cuidadores'),
+    path('api/cuidadores/<int:cuidador_id>', views.obtieneUsuarios, name='editar_cuidador')
    
     
 ]

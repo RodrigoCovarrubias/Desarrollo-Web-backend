@@ -18,7 +18,7 @@ return response
 }
 
 function obtenerMascotas() {
-    const apiUrl = 'https://api.petfinder.com/v2/animals?type=dog';
+    const apiUrl = 'https://api.petfinder.com/v2/animals?type=cat';
     obtenerToken()
       .done(dataAuth => {
         const accessToken = dataAuth.access_token;
