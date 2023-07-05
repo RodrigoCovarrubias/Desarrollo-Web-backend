@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from .models import Cuidadores
+from .models import Cuidadores, Producto
 from django.http import JsonResponse
 import logging
 from rest_framework.decorators import api_view
@@ -12,6 +12,7 @@ from rest_framework.decorators import permission_classes
 from .models import Cuidadores
 from rest_framework import status
 import json
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes((IsAuthenticated,))
@@ -69,18 +70,6 @@ def creaUsuarios(request):
         status=data.get('status', True)
     )
     return Response({"id": cuidador.id}, status=status.HTTP_201_CREATED)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -181,3 +170,14 @@ def editar_cuidador(request, cuidador_id):
         return redirect('paseadores')
     
     return redirect('paseadores')
+
+class ProductoListView(View):
+    template_name = 'carrito.html'
+
+    def get_queryset(self):
+        return Producto.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        producto = self.get_queryset()
+        context = {'producto': producto}
+        return render(request, self.template_name, context)

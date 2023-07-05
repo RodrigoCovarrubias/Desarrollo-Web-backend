@@ -13,3 +13,13 @@ class Cuidadores(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Producto(models.Model):
+    idProducto = models.AutoField(primary_key=True,name="IdProducto", null=False)
+    nombreProducto = models.CharField("NombreProducto",  max_length=200,null=False)
+    precioProducto = models.IntegerField("PrecioProducto", null=False)
+    stockProducto = models.IntegerField("StockProducto", null=False)
+    imagen = models.ImageField("Imagen", null=True)
+
+    def __str__(self):
+        return self.name

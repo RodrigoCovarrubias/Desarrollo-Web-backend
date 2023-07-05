@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+   <div class="container">
+      <div class="row mt-4 mb-5">
+         {% for product in producto %}
+         <div class="card-group col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card h-100">
+               <img class="card-img-top img-fluid" src="{% static product.imagen %}" alt="Card image cap" style="width: 100% !important; height: auto !important;">
+               <div class="card-body" data-nombre="{{ product.nombreProducto }}" style="margin-top: 50px;">
+                  <h5 class="card-title">{{ product.nombreProducto }}</h5>
+                  <p class="card-text">{{ product.precioProducto }}</p>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+      </div> 
+   </div>
+</main>
+
+{% endblock %}
+<style>
+   .card-title {
+      margin-top: 50px !important;
+   }
+ </style>
