@@ -9,6 +9,33 @@ function validateForm() {
 
   return true;
 }
+
+function showCartModal() {
+  var modal = document.getElementById('cartModal');
+  modal.style.display = 'block';
+  var cartItems = JSON.parse(localStorage.getItem('cart')) || {};
+  var cartItemsList = document.getElementById('cartItems');
+  cartItemsList.innerHTML = '';
+  for (var productId in cartItems) {
+    if (cartItems.hasOwnProperty(productId)) {
+      var quantity = cartItems[productId];
+      var listItem = document.createElement('li');
+      listItem.textContent = 'Product ID: ' + productId + ', Quantity: ' + quantity;
+
+      cartItemsList.appendChild(listItem);
+    }
+  }
+}
+
+function hideCartModal() {
+  var modal = document.getElementById('cartModal');
+  modal.style.display = 'none';
+}
+
+// Call the updateCartItems function when the modal is shown
+$('#cartModal').on('show.bs.modal', function () {
+  updateCartItems();
+});
 document.addEventListener('DOMContentLoaded', function() {
   var eliminarButton = document.getElementById('eliminarButton');
   eliminarButton.addEventListener('click', handleEliminarButtonClick);
@@ -106,3 +133,5 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+
+

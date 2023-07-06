@@ -12,6 +12,7 @@ from rest_framework.decorators import permission_classes
 from .models import Cuidadores
 from rest_framework import status
 import json
+from django.shortcuts import get_object_or_404
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -71,14 +72,8 @@ def creaUsuarios(request):
     )
     return Response({"id": cuidador.id}, status=status.HTTP_201_CREATED)
 
-
-
-
 def index_view(request):
     return render(request, 'index.html')
-
-
-
 
 def registro_view(request):
     if request.method == 'POST':
@@ -181,3 +176,16 @@ class ProductoListView(View):
         producto = self.get_queryset()
         context = {'producto': producto}
         return render(request, self.template_name, context)
+    
+
+def get_product(request, product_id):
+    product = get_object_or_404(Producto, idProducto=product_id)
+    response_data = {
+        'product': {
+            'id': product.idProducto,
+            'name': product.nombreProducto,
+            'price': product.precioProducto,
+            'stock': product.stockProducto
+        }
+    }
+    return JsonResponse(response_data)

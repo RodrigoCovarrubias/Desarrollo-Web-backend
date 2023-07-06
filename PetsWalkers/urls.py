@@ -18,6 +18,7 @@ urlpatterns = [
     path('api/cuidadores',views.obtieneUsuarios,name='cuidadores'),
     path('api/crearcuidadores',views.creaUsuarios,name='cuidadores'),
     path('api/cuidadores/<int:cuidador_id>', views.obtieneUsuarios, name='editar_cuidador'), 
-    path('carrito/', views.ProductoListView.as_view(), name ='carrito')
+    path('carrito/', views.ProductoListView.as_view(), name ='carrito'),
+    path('api/product/<int:product_id>/', views.get_product, name='get_product'),
    
 ]

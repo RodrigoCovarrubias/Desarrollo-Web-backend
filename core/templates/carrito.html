@@ -6,23 +6,32 @@
    <div class="container">
       <div class="row mt-4 mb-5">
          {% for product in producto %}
-         <div class="card-group col-lg-4 col-md-6 col-sm-12 mb-4">
+         <div class="card-deck col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card h-100">
-               <img class="card-img-top img-fluid" src="{% static product.imagen %}" alt="Card image cap" style="width: 100% !important; height: auto !important;">
-               <div class="card-body" data-nombre="{{ product.nombreProducto }}" style="margin-top: 50px;">
-                  <h5 class="card-title">{{ product.nombreProducto }}</h5>
+               <img class="card-img-top img-fluid" src="{% static product.imagen %}" alt="Card image cap" style="height: 200px; object-fit: contain;">
+               <div class="card-body d-flex flex-column">
+                  <h5 class="card-title flex-grow-1">{{ product.nombreProducto }}</h5>
                   <p class="card-text">{{ product.precioProducto }}</p>
+                     <div class="d-flex">
+                        <div class="input-group w-50">
+                           <div class="input-group-prepend">
+                              <button class="btn btn-outline-primary quantity-decrement" type="button" data-productid="{{ product.IdProducto }}" onclick=decrementQuantity(this)>-</button>
+                           </div>
+                           <input type="number" class="form-control quantity-input" value="1" min="1">
+                           <div class="input-group-append">
+                              <button class="btn btn-outline-primary quantity-increment" type="button" data-productid="{{ product.IdProducto }}" onclick=incrementQuantity(this)>+</button>
+                           </div>
+                        </div>
+                        <button class="btn btn-primary addToCartBtn mx-auto" data-productid="{{ product.IdProducto }}" onclick=addToCart(this)>Agregar al carrito</button>
+                     </div>                  
                </div>
             </div>
          </div>
          {% endfor %}
       </div> 
-   </div>
+   </div>|
 </main>
-
+<script src="{% static 'Scripts/carrito.js'%}" ></script>
 {% endblock %}
-<style>
-   .card-title {
-      margin-top: 50px !important;
-   }
- </style>
+
+
