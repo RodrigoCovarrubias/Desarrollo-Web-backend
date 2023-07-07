@@ -13,6 +13,7 @@ from .models import Cuidadores
 from rest_framework import status
 import json
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -176,16 +177,36 @@ class ProductoListView(View):
         producto = self.get_queryset()
         context = {'producto': producto}
         return render(request, self.template_name, context)
-    
 
-def get_product(request, product_id):
-    product = get_object_or_404(Producto, idProducto=product_id)
-    response_data = {
-        'product': {
-            'id': product.idProducto,
-            'name': product.nombreProducto,
-            'price': product.precioProducto,
-            'stock': product.stockProducto
-        }
-    }
-    return JsonResponse(response_data)
+@csrf_exempt
+def validaCantidadProducto(request,id):
+    try:
+        producto = Producto.objects.get(IdProducto=id)
+        print(producto.stockProducto)
+        return JsonResponse({"stock": producto.stockProducto}, status=200)
+    except Producto.DoesNotExist:
+        return JsonResponse({"error": "Product does not exist"}, status=404)
+@csrf_exempt
+def comprar(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        cart = data.get('cart')
+
+        for item in cart:
+            product_id = item.get('id')
+            quantity = item.get('count')
+            try:
+                product = Producto.objects.get(IdProducto=product_id)
+                if product.stockProducto >= quantity:
+                    product.stockProducto -= quantity
+                    product.save()
+                else:
+                    # Handle insufficient stock error
+                    return JsonResponse({'success': False, 'message': f'Insufficient stock for product {product.nombreProducto}'}, status=400)
+            except Producto.DoesNotExist:
+                # Handle product not found error
+                return JsonResponse({'success': False, 'message': 'Product not found'}, status=404)
+
+        return JsonResponse({'success': True, 'message': 'Purchase successful'}, status=200)
+    else:
+        return JsonResponse({'message': 'Method not allowed'}, status=405)

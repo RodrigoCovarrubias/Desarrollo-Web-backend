@@ -17,20 +17,71 @@
                            <div class="input-group-prepend">
                               <button class="btn btn-outline-primary quantity-decrement" type="button" data-productid="{{ product.IdProducto }}" onclick=decrementQuantity(this)>-</button>
                            </div>
-                           <input type="number" class="form-control quantity-input" value="1" min="1">
+                           <input type="number" class="form-control quantity-input" data-productid="{{ product.IdProducto }}" value="1" min="1">
                            <div class="input-group-append">
                               <button class="btn btn-outline-primary quantity-increment" type="button" data-productid="{{ product.IdProducto }}" onclick=incrementQuantity(this)>+</button>
                            </div>
                         </div>
-                        <button class="btn btn-primary addToCartBtn mx-auto" data-productid="{{ product.IdProducto }}" onclick=addToCart(this)>Agregar al carrito</button>
+                        <button class="add-to-cart btn btn-primary addToCartBtn mx-auto" 
+                              data-productid="{{ product.IdProducto }}"
+                              data-name="{{ product.nombreProducto }}"
+                              data-price="{{ product.precioProducto }}"
+                              data-img="{{ procuct.imagen }}">
+                           Agregar al carrito
+                        </button>
                      </div>                  
                </div>
             </div>
          </div>
          {% endfor %}
+      </main>
+      <div class="container">
+         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart">Carrito <span class="total-count"></span></button>
+         <button class="clear-cart btn btn-danger">Limpiar</button>
       </div> 
    </div>|
+   <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+            <button type="button" class="btn close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="show-cart table">
+              
+            </table>
+            <div>Total: $<span class="total-cart"></span></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary botonComprar">Comprar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="popup" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Compra realizada</h5>
+            <button type="button" class="btn close" data-bs-dismiss="modal" aria-label="Cerrar" onclick= "location.reload()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Tu compra ha sido procesada con éxito.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick= "location.reload()">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div> 
 </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{% static 'Scripts/carrito.js'%}" ></script>
 {% endblock %}
 
