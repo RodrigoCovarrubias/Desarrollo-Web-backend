@@ -21,7 +21,7 @@
                    data-nombre="{{ cuidador.name }}"
                    data-descripcion="{{ cuidador.description }}"
                    data-id="{{ cuidador.id }}">
-                <h5 class="card-title">{{ cuidador.name }}</h5>
+                <h5 class="card-title">{{ cuidador.name }} {{cuidador.last_name}}</h5>
                 <p class="card-text">{{ cuidador.description }}</p>
                 <div class="form-check">
                   <label class="form-check-label">
@@ -93,5 +93,7 @@
       </div>
     </div>
   </div>
-
+</main>
+<script src="{% static 'node_modules/jquery/dist/jquery.js'%}"></script>
+<script src="{% static 'Scripts/crud.js'%}"></script>
 {% endblock %}

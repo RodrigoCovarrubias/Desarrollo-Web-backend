@@ -11,14 +11,14 @@ from rest_framework.authtoken.models import Token
 @api_view(['POST'])
 def login(request):
     data = JSONParser().parse(request)
-    username = data['usuario']
-    password = data['contraseña']
+    username = data['username']
+    password = data['password']
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
-        return Response("Usuario inválido")
+        return Response("Usuario inválido",status=status.HTTP_400_BAD_REQUEST)
     pass_valido = check_password(password, user.password)
     if not pass_valido:
-        return Response("Contraseña inválido")
+        return Response("Contraseña inválido",status=status.HTTP_400_BAD_REQUEST)
     token, created = Token.objects.get_or_create(user=user)
     return Response(token.key)

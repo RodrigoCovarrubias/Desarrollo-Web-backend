@@ -117,24 +117,23 @@
                 <div class="modal-body">
                   <form onsubmit="return validateForm()">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Correo</label>
+                      <label for="usuario">Usuario</label>
                       <input
-                        type="email"
+                        name="usuario"
                         class="form-control"
-                        id="exampleInputEmail1"
+                        id="usuario"
                         aria-describedby="emailHelp"
                         required
                       />
-                      <small id="emailHelp" class="form-text text-muted"
-                        >Nunca Compartiremos tu correo.</small
-                      >
+                    
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Contraseña</label>
                       <input
+                        name="contrasena"
                         type="password"
                         class="form-control"
-                        id="exampleInputPassword1"
+                        id="contrasena"
                         required
                       />
                     </div>
@@ -148,7 +147,8 @@
                       >
                         Cerrar
                       </button>
-                      <button type="submit" class="btn btn-primary" id="login-button">
+                      <button type="submit" class="btn btn-primary inicioSesion" id="login-button"
+                      >
                         Iniciar Sesion
                       </button>
                     </div>

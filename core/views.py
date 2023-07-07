@@ -163,9 +163,11 @@ def editar_cuidador(request, cuidador_id):
         cuidador.description = descripcion
         cuidador.save()
         
-        return redirect('paseadores')
+        return JsonResponse({'success': True})
+
     
-    return redirect('paseadores')
+    return JsonResponse({'success': False})
+
 
 class ProductoListView(View):
     template_name = 'carrito.html'
